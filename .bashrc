@@ -115,59 +115,68 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
-
-# Powerline
-if [ -f /usr/share/powerline/bindings/bash/powerline.sh ]; then
-    source /usr/share/powerline/bindings/bash/powerline.sh
-fi
-
-
 # Custom
 
-shopt -s autocd
-shopt -s histappend
+# Powerline
+# if [ -f /usr/share/powerline/bindings/bash/powerline.sh ]; then
+#     source /usr/share/powerline/bindings/bash/powerline.sh
+# fi
 
-export PATH=$PATH:$HOME/bin
 
-export HISTSIZE=5000
-export HISTFILESIZE=10000
 
-bind '"\e[A": history-search-backward'
-bind '"\e[B": history-search-forward'
+# shopt -s autocd
+# shopt -s histappend
 
-export CLICOLOR=1
-export LSCOLORS=GxFxCxDxBxegedabagaced
+# export PATH=$PATH:$HOME/bin
 
-txtred='\e[0;31m' # Red
-txtgrn='\e[0;32m' # Green
+# export HISTSIZE=5000
+# export HISTFILESIZE=10000
+
+# bind '"\e[A": history-search-backward'
+# bind '"\e[B": history-search-forward'
+
+# export CLICOLOR=1
+# export LSCOLORS=GxFxCxDxBxegedabagaced
+
+# Color   Code
+# Black   0;30
+# Blue    0;34
+# Green   0;32
+# Cyan    0;36
+# Red 0;31
+# Purple  0;35
+# Brown   0;33
+# Blue    0;34
+# Green   0;32
+# Cyan    0;36
+# Red 0;31
+# Purple  0;35
+# Brown   0;33
+HOST_NAME=abhi
+txtred='\e[1;31m' # Red
+txtgrn='\e[1;32m' # Green
 bldgrn='\e[1;32m' # Bold Green
-bldpur='\e[1;35m' # Bold Purple
+bldpur='\e[1;33m' # Bold Yellow
 txtrst='\e[0m'    # Text Reset
 
 emojis=("👾" "🌐" "🎲" "🌍" "🐉" "🌵")
 
 EMOJI=${emojis[$RANDOM % ${#emojis[@]} ]}
 
-print_before_the_prompt () {
+CustomPrompt () {
     dir=$PWD
-    home=$HOME
+    # home=$HOME
     dir=${dir/"$HOME"/"~"}
-    printf "\n $txtred%s: $bldpur%s $txtgrn%s\n$txtrst" "$HOST_NAME" "$dir" "$(parse_git_branch)"
+    printf "\n $txtred%s: $bldpur%s $txtred%s\n$txtrst" "$HOST_NAME" "$dir" "$(git_branch)"
 }
 
-PROMPT_COMMAND=print_before_the_prompt
-PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
+PROMPT_COMMAND=CustomPrompt
+# PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
 PS1="$EMOJI >"
 
-fortune | cowsay -f tux
+# fortune | cowsay -f tux
 
 # Add git branch if its present to PS1
-
-parse_git_branch() {
+git_branch() {
  git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
 }
-# if [ "$color_prompt" = yes ]; then
-#  PS1='$(parse_git_branch)'
-# else
-#  PS1='$(parse_git_branch)\$ '
-# fi
