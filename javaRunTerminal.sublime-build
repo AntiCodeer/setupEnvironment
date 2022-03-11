@@ -1,4 +1,0 @@
-{
-	"cmd": ["javac", "$file_name", "&&", "start", "cmd", "/k", "java", "$file_base_name"],
-	"shell": true
-}
