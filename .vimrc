@@ -24,3 +24,5 @@ set scrolloff=8
 " set colorcolumn=80
 " Toggle relative line number
 nmap <C-L><C-L> :set invrelativenumber<CR>
+
+" This is a new bashrc
