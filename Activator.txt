@@ -1,0 +1,14 @@
+1. https://config.office.com/deploymentsettings : Choose your configuration.xml
+2. https://www.microsoft.com/en-US/download/details.aspx?id=49117 Download tool and extract the setup and configuration.xml in same diretory
+3. Got to the direcrory with Admin CMD, type "setup /configure configuration.xml"
+4. Go the installation directory with "cd C:\Program Files\Microsoft Office\Office16"
+5. Follow this commands
+
+	for /f %x in ('dir /b ..\root\Licenses16\ProPlus2021VL_KMS*.xrm-ms') do cscript ospp.vbs /inslic:"..\root\Licenses16\%x"
+
+
+	cscript ospp.vbs /setprt:1688
+	cscript ospp.vbs /unpkey:6F7TH >nul
+	cscript ospp.vbs /inpkey:FXYTK-NJJ8C-GB6DW-3DYQT-6F7TH
+	cscript ospp.vbs /sethst:e8.us.to
+	cscript ospp.vbs /act
